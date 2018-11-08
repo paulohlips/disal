@@ -57,17 +57,16 @@ class ImportaPlanilha{
 	}
 
 	/*
-	 * Método que verifica se o registro CPF da planilha já existe na tabela cliente
-	 * @param $cpf - CPF do cliente que está sendo lido na planilha
+	 * Método que verifica se o registro ISBN da planilha já existe na tabela de estoque
 	 * @return Valor Booleano TRUE para duplicado e FALSE caso não 
 	 */
-	private function isRegistroDuplicado($cpf=null){
+	private function isRegistroDuplicado($isbn=null){
 		$retorno = false;
 		try{
-			if(!empty($cpf)):
-				$sql = 'SELECT id FROM cliente WHERE cpf = ?';
+			if(!empty($isbn)):
+				$sql = 'SELECT id FROM disal_estoque WHERE isbn = ?';
 				$stm = $this->conexao->prepare($sql);
-				$stm->bindValue(1, $cpf);
+				$stm->bindValue(1, $isbn);
 				$stm->execute();
 				$dados = $stm->fetchAll();
 
@@ -94,23 +93,18 @@ class ImportaPlanilha{
 	public function insertDados(){
 
 		try{
-			$sql = 'INSERT INTO cliente (codigo, nome, cpf, email, celular)VALUES(?, ?, ?, ?, ?)';
+			$sql = 'INSERT INTO disal_estoque(isbn, qtd_estoque, data_atualizacao)VALUES(?, ?, now())';
 			$stm = $this->conexao->prepare($sql);
 			
 			$linha = 0;
 			foreach($this->planilha->rows() as $chave => $valor):
-				if ($chave >= 1 && !$this->isRegistroDuplicado(trim($valor[2]))):		
-					$codigo  = trim($valor[0]);
-					$nome    = trim($valor[1]);
-					$cpf     = trim($valor[2]);
-					$email   = trim($valor[3]);
-					$celular = trim($valor[4]);
+				if ($chave >= 1 && !$this->isRegistroDuplicado(trim($valor[0]))):		
+					$isbn  = trim($valor[0]);
+					$qtd_estoque    = trim($valor[7]);
+				
+					$stm->bindValue(1, $isbn);
+					$stm->bindValue(2, $qtd_estoque);
 
-					$stm->bindValue(1, $codigo);
-					$stm->bindValue(2, $nome);
-					$stm->bindValue(3, $cpf);
-					$stm->bindValue(4, $email);
-					$stm->bindValue(5, $celular);
 					$retorno = $stm->execute();
 					
 					if($retorno == true) $linha++;
