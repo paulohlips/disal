@@ -93,17 +93,17 @@ class ImportaPlanilha{
 	public function insertDados(){
 
 		try{
-			$sql = 'INSERT INTO disal_estoque(isbn, qtd_estoque, data_atualizacao)VALUES(?, ?, now())';
+			$sql = 'INSERT INTO disal_estoque(isbn, qtd_estoque, data_atualizacao)VALUES(?, 0, now())';
 			$stm = $this->conexao->prepare($sql);
 			
 			$linha = 0;
 			foreach($this->planilha->rows() as $chave => $valor):
 				if ($chave >= 1 && !$this->isRegistroDuplicado(trim($valor[0]))):		
 					$isbn  = trim($valor[0]);
-					$qtd_estoque    = trim($valor[7]);
+					//$qtd_estoque    = trim($valor[7]);
 				
 					$stm->bindValue(1, $isbn);
-					$stm->bindValue(2, $qtd_estoque);
+					//$stm->bindValue(2, $qtd_estoque);
 
 					$retorno = $stm->execute();
 					

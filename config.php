@@ -10,7 +10,7 @@ require_once 'ImportaPlanilha.php';
 $pdo = new PDO('mysql:host=localhost;dbname=sget', 'root', '');
 
 // Instância o objeto importação e passa como parâmetro o caminho da planilha e a conexão PDO 
-$obj = new ImportaPlanilha('./Plan1.xlsx', $pdo);
+$obj = new ImportaPlanilha('./', $pdo);
 
 // Chama o método que retorna a quantidade de linhas 
 echo 'Quantidade de Linhas na Planilha ' , $obj->getQtdeLinhas(), '<br>';

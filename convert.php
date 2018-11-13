@@ -2,8 +2,8 @@
 
 require './Classes/vendor/autoload.php'; //autoload do projeto
 
-use PhpOffice\PhpSpreadsheet\Spreadsheet; //classe responsável pela manipulação da planilha
-use PhpOffice\PhpSpreadsheet\IOFactory; //classe responsável por ler uma planilha
+use PhpOffice\PhpSpreadsheet\Spreadsheet; //Manipulação da planilha
+use PhpOffice\PhpSpreadsheet\IOFactory; //Ler uma planilha
 use PhpOffice\PhpSpreadsheet\Reader\Xls;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
