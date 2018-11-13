@@ -1,9 +1,9 @@
 <?php
 
 // Dados do servidor
-$servidor = 'ftp.disal.com.br'; // Endereço
-$usuario = 'livros'; // Usuário
-$senha = 'l1vr0s@disal'; // Senha
+$servidor = ''; // Endereço
+$usuario = ''; // Usuário
+$senha = ''; // Senha
 
 // Abre a conexão com o servidor FTP
 $ftp = ftp_connect($servidor); // Retorno: true ou false
