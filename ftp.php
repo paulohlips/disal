@@ -1,13 +1,12 @@
 <?php
 
 // Dados do servidor
-$servidor = ''; // Endereço
-$usuario = ''; // Usuário
-$senha = ''; // Senha
+$servidor = 'ftp.disal.com.br'; // Endereço
+$usuario = 'livros'; // Usuário
+$senha = 'l1vr0s@disal'; // Senha
 
 // Abre a conexão com o servidor FTP
 $ftp = ftp_connect($servidor); // Retorno: true ou false
-
 
 if($ftp == true){
     echo"Conexão estabelecida com servidor FTP.<br>";
@@ -44,11 +43,13 @@ if($envia == TRUE){
 // Define variáveis para o recebimento de arquivo
 $pasta_download = "./ftp/teste.xls"; // Localização (local)
 $path_arquivo = "/estoque/"; // Pasta (externa)
-$arquivo = "excel_preco_estoque_20181109041500.xls"; // Nome do arquivo (externo)
+
+$today = date("Ymd")."041500.xls";
+
+$arquivo = "excel_preco_estoque_".$today; // Nome do arquivo (externo)
 
 // Recebe o arquivo pelo FTP em modo ASCII
 $recebe = ftp_get($ftp, $pasta_download, $path_arquivo.$arquivo, FTP_ASCII);// Retorno: true / false
-//$recebe = ftp_get($ftp, "./ftp/teste.txt","./home/cerradoti/teste.txt", FTP_ASCII);
 
 if($recebe == TRUE){
     echo"Seu arquivo foi recebido com sucesso.";

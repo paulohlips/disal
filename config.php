@@ -1,8 +1,5 @@
 <?php 
 
-// Seta configuração para não dar timeout 
-ini_set('max_execution_time','-1');
-
 // Require com a classe de importação construída 
 require_once 'ImportaPlanilha.php';
 
@@ -10,11 +7,10 @@ require_once 'ImportaPlanilha.php';
 $pdo = new PDO('mysql:host=localhost;dbname=sget', 'root', '');
 
 // Instância o objeto importação e passa como parâmetro o caminho da planilha e a conexão PDO 
-$obj = new ImportaPlanilha('./', $pdo);
+$obj = new ImportaPlanilha('./teste.xls', $pdo);
 
 // Chama o método que retorna a quantidade de linhas 
 echo 'Quantidade de Linhas na Planilha ' , $obj->getQtdeLinhas(), '<br>';
-echo (date('d-m-Y')).'<br>';
 
 // Chama o método que retorna a quantidade de colunas 
 echo 'Quantidade de Colunas na Planilha ' , $obj->getQtdeColunas(), '<br>';
